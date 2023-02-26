@@ -1,0 +1,92 @@
+.todoList {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 200px;
+  z-index: 10;
+
+  &__list {
+    width: 540px;
+    min-height: 100px;
+    z-index: 10;
+    border-radius: 5px;
+    background: rgba(37, 39, 60, 1);
+
+    &-item {
+      color: #cbcde6;
+      font-weight: 400;
+      font-size: 18px;
+      font-family: "Josefin Sans", sans-serif;
+
+      border-bottom: 1px solid #383a4f;
+      height: 65px;
+
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: space-between;
+
+      &-grop {
+        display: flex;
+        align-items: center;
+      }
+      &-selected {
+        margin: 0px 25px;
+        width: 25px;
+        height: 25px;
+        border: 1px solid #4b4d62;
+        border-radius: 13px;
+        transition: all 0.1s linear;
+        &:hover {
+          border-color: rgba(134, 96, 244, 1);
+        }
+      }
+      &:hover &__close {
+        opacity: 1;
+      }
+      &__close {
+        margin-right: 30px;
+        opacity: 0;
+        transition: all 0.2s linear;
+      }
+    }
+    &-footer {
+      color: rgba(203, 205, 230, 0.48);
+      h2 {
+        font-weight: 400;
+        font-size: 18px;
+      }
+      font-family: "Josefin Sans", sans-serif;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      height: 55px;
+      margin: 0 auto;
+      &_filter {
+        font-weight: 400;
+        font-size: 18px;
+        display: flex;
+        gap: 10px;
+      }
+    }
+  }
+  &__addTodo {
+    height: 64px;
+    width: 540px;
+    z-index: 10;
+    border-radius: 5px;
+    background: rgba(37, 39, 60, 1);
+    margin-bottom: 24px;
+  }
+
+  &__footer {
+    margin-top: 50px;
+    font-family: "Josefin Sans", sans-serif;
+    color: rgba(203, 205, 230, 0.48);
+    font-weight: 400;
+    font-size: 18px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
