@@ -1,15 +1,23 @@
+//react and redux
+import { useSelector, useDispatch } from "react-redux";
+
+//Components
 import {
   removeTodo,
   toggleTodo,
   clearComletedTodo,
   selectVisibleTodos,
+  addTodo,
 } from "../../features/todos/todos-slice";
 import { setFilter } from "../../features/filters/filtres-slice";
 import CreateTodo from "./CreateTodo";
+
+// Styled
+import { Reorder } from "framer-motion";
 import "./todolist.scss";
 import { AiOutlineClose } from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
 import toogleImg from "../../img/toggleClick.png";
+
 const TodoList = () => {
   const activeFilter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
@@ -20,32 +28,47 @@ const TodoList = () => {
       <div className="todoList">
         <CreateTodo />
         <div className="todoList__list">
-          {todos.map((todo) => {
-            return (
-              <ul className="todoList__list-item" key={todo.id}>
-                <ul className="todoList__list-item-grop">
-                  {todo.completed ? (
-                    <img
-                      className="todoList__list-item-selected"
-                      onClick={() => dispatch(toggleTodo(todo.id))}
-                      src={toogleImg}
-                    />
-                  ) : (
-                    <div
-                      className="todoList__list-item-selected"
-                      onClick={() => dispatch(toggleTodo(todo.id))}
-                    />
-                  )}
-                  <h2 className="todoList__list-item__title">{todo.title}</h2>
-                </ul>
-                <AiOutlineClose
-                  size={18}
-                  onClick={() => dispatch(removeTodo(todo.id))}
-                  className="todoList__list-item__close"
-                />
-              </ul>
-            );
-          })}
+          <Reorder.Group
+            as="div"
+            axys="y"
+            values={todos}
+            onReorder={addTodo}
+            className="card__inner"
+          >
+            {todos.map((todo) => {
+              return (
+                <Reorder.Item
+                  as="div"
+                  className="todoList__list-item"
+                  key={todo.id}
+                  value={todo}
+                  whileDrag={{ scale: 1.1 }}
+                >
+                  <ul className="todoList__list-item-grop">
+                    {todo.completed ? (
+                      // eslint-disable-next-line
+                      <img
+                        className="todoList__list-item-selected"
+                        onClick={() => dispatch(toggleTodo(todo.id))}
+                        src={toogleImg}
+                      />
+                    ) : (
+                      <div
+                        className="todoList__list-item-selected"
+                        onClick={() => dispatch(toggleTodo(todo.id))}
+                      />
+                    )}
+                    <h2 className="todoList__list-item__title">{todo.title}</h2>
+                  </ul>
+                  <AiOutlineClose
+                    size={18}
+                    onClick={() => dispatch(removeTodo(todo.id))}
+                    className="todoList__list-item__close"
+                  />
+                </Reorder.Item>
+              );
+            })}
+          </Reorder.Group>
           <div className="todoList__list-footer">
             <h2>{todos.length} item left</h2>
             <div className="todoList__list-footer_filter">
