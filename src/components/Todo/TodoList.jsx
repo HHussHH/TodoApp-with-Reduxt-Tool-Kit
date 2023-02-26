@@ -1,12 +1,20 @@
-import { removeTodo, toggleTodo } from "../../features/todos/todos-slice";
+import {
+  removeTodo,
+  toggleTodo,
+  clearComletedTodo,
+  selectVisibleTodos,
+} from "../../features/todos/todos-slice";
+import { setFilter } from "../../features/filters/filtres-slice";
 import CreateTodo from "./CreateTodo";
 import "./todolist.scss";
 import { AiOutlineClose } from "react-icons/ai";
 import { useSelector, useDispatch } from "react-redux";
 import toogleImg from "../../img/toggleClick.png";
 const TodoList = () => {
+  const activeFilter = useSelector((state) => state.filter);
   const dispatch = useDispatch();
-  const todos = useSelector((state) => state.todos);
+  const todos = useSelector((state) => selectVisibleTodos(state, activeFilter));
+  const handleFilter = (filtr) => dispatch(setFilter(filtr));
   return (
     <>
       <div className="todoList">
@@ -14,8 +22,8 @@ const TodoList = () => {
         <div className="todoList__list">
           {todos.map((todo) => {
             return (
-              <div className="todoList__list-item" key={todo.id}>
-                <div className="todoList__list-item-grop">
+              <ul className="todoList__list-item" key={todo.id}>
+                <ul className="todoList__list-item-grop">
                   {todo.completed ? (
                     <img
                       className="todoList__list-item-selected"
@@ -28,24 +36,38 @@ const TodoList = () => {
                       onClick={() => dispatch(toggleTodo(todo.id))}
                     />
                   )}
-                  <p className="todoList__list-item__title">{todo.title}</p>
-                </div>
+                  <h2 className="todoList__list-item__title">{todo.title}</h2>
+                </ul>
                 <AiOutlineClose
                   size={18}
                   onClick={() => dispatch(removeTodo(todo.id))}
                   className="todoList__list-item__close"
                 />
-              </div>
+              </ul>
             );
           })}
           <div className="todoList__list-footer">
             <h2>{todos.length} item left</h2>
             <div className="todoList__list-footer_filter">
-              <h2>All</h2>
-              <h2>Active</h2>
-              <h2>Completed</h2>
+              <h2 className="filter-op" onClick={() => handleFilter("all")}>
+                All
+              </h2>
+              <h2 className="filter-op" onClick={() => handleFilter("active")}>
+                Active
+              </h2>
+              <h2
+                className="filter-op"
+                onClick={() => handleFilter("completed")}
+              >
+                Completed
+              </h2>
             </div>
-            <h2>Clear completed</h2>
+            <h2
+              className="filter-op"
+              onClick={() => dispatch(clearComletedTodo())}
+            >
+              Clear completed
+            </h2>
           </div>
         </div>
         <footer className="todoList__footer">

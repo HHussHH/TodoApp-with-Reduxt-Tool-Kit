@@ -12,9 +12,11 @@ import {
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import { todosReducer } from "./features/todos/todos-slice";
+import { filterReducer } from "./features/filters/filtres-slice";
 const rootReducer = combineReducers({
   theme: themeReducer,
   todos: todosReducer,
+  filter: filterReducer,
 });
 const persistConfig = {
   key: "root",

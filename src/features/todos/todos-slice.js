@@ -25,8 +25,26 @@ const todoSlice = createSlice({
       const todo = state.find((todo) => todo.id === id);
       todo.completed = !todo.completed;
     },
+    clearComletedTodo: (state, action) => {
+      return state.filter((todo) => todo.completed === false);
+    },
   },
 });
 
-export const { addTodo, removeTodo, toggleTodo } = todoSlice.actions;
+export const selectVisibleTodos = (state, filter) => {
+  switch (filter) {
+    case "all":
+      return state.todos;
+    case "active":
+      return state.todos.filter((todo) => !todo.completed);
+    case "completed":
+      return state.todos.filter((todo) => todo.completed);
+    default: {
+      return state.todos;
+    }
+  }
+};
+
+export const { addTodo, removeTodo, toggleTodo, clearComletedTodo } =
+  todoSlice.actions;
 export const todosReducer = todoSlice.reducer;
