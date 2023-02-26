@@ -73,10 +73,42 @@
   &__addTodo {
     height: 64px;
     width: 540px;
+
     z-index: 10;
     border-radius: 5px;
     background: rgba(37, 39, 60, 1);
+
     margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__type {
+      font-family: "Josefin Sans", sans-serif;
+      margin-left: 25px;
+      background-color: inherit;
+      height: 32px;
+      border: 0;
+      max-height: 64px;
+      font-weight: 400;
+      font-size: 18px;
+      color: #cbcde6;
+      &:focus-visible {
+        outline: none;
+      }
+    }
+    &__btn {
+      font-family: "Josefin Sans", sans-serif;
+      margin-right: 25px;
+      width: fit-content;
+      padding: 5px;
+      border: none;
+      border-radius: 13px;
+      background-color: #cbcde669;
+      transition: background-color 0.2s linear;
+      &:hover {
+        background-color: #cbcde6;
+      }
+    }
   }
 
   &__footer {
