@@ -11,7 +11,8 @@
     position: absolute;
     z-index: 2;
     top: 0%;
-    width: 1440px;
+    width: inherit;
+    max-width: 1440px;
     height: 320px;
     background: linear-gradient(
       to left,
@@ -22,7 +23,7 @@
 
   &__inner {
     display: flex;
-    margin: 90px auto 0px;
+    margin: 90px auto 50px;
     width: max-content;
   }
   &__title {
@@ -33,5 +34,31 @@
     color: #fff;
     letter-spacing: 10px;
     margin-right: 360px;
+  }
+}
+
+@media (max-width: 749px) {
+  .header {
+    &__inner {
+      width: 440px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__title {
+      margin: 0;
+    }
+  }
+}
+
+@media (max-width: 450px) {
+  .header {
+    &__inner {
+      width: 300px;
+      display: flex;
+      justify-content: space-between;
+    }
+    &__title {
+      margin: 0;
+    }
   }
 }

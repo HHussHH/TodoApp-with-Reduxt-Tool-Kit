@@ -2,7 +2,7 @@
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: 200px;
+  top: 0px;
   z-index: 10;
 
   &__list {
@@ -71,6 +71,7 @@
       }
     }
     &-footer {
+      padding: 25px 0px;
       color: rgba(203, 205, 230, 0.48);
       h2 {
         font-weight: 400;
@@ -80,7 +81,7 @@
       display: flex;
       justify-content: space-around;
       align-items: center;
-      height: 55px;
+
       margin: 0 auto;
       &_filter {
         font-weight: 400;
@@ -130,19 +131,56 @@
       }
     }
   }
-
-  &__footer {
-    margin-top: 50px;
-    font-family: "Josefin Sans", sans-serif;
-    color: rgba(203, 205, 230, 0.48);
-    font-weight: 400;
-    font-size: 18px;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 }
 
 .filter-op {
   cursor: pointer;
+}
+
+@media (max-width: 749px) {
+  .todoList {
+    &__addTodo {
+      margin: 30px auto;
+      width: 440px;
+    }
+    &__list {
+      margin: 0 auto;
+      width: 440px;
+      min-height: auto;
+      z-index: 10;
+      border-radius: 5px;
+      background: rgba(37, 39, 60, 1);
+    }
+  }
+}
+
+@media (max-width: 449px) {
+  .todoList {
+    &__addTodo {
+      margin: 15px auto;
+      width: 300px;
+    }
+    &__list {
+      margin: 0 auto;
+      width: 300px;
+      min-height: auto;
+    }
+
+    &__list-footer {
+      display: block;
+      text-align: center;
+      &-item {
+        margin-top: 10px;
+        margin-bottom: 15px;
+      }
+      &_filter {
+        margin-left: 60px;
+        gap: 20px;
+        margin-bottom: 20px;
+      }
+      &_filterAll {
+        padding-bottom: 20px;
+      }
+    }
+  }
 }
